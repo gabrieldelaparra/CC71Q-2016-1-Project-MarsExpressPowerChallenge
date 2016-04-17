@@ -1,0 +1,83 @@
+\documentclass{article}
+
+%Used for PDFTex
+\usepackage[utf8]{inputenc}
+
+%Language Imports:
+\usepackage[spanish]{babel}
+
+%Headers & Footers:
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+
+%Math Symbols:
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{mathtools}
+
+%Bibliography:
+\usepackage{natbib}
+
+%Subsections
+\usepackage{subfiles}
+
+%Pictures
+%\usepackage{graphicx} % Required to insert images
+
+%Hyperlinks:
+%\usepackage{url}
+
+%Variable Definitions:
+%\def\e{\varepsilon}
+%\def\ra{\rightarrow}
+%\def\P{\mathcal{P}}
+%\def\NP{\mathcal{NP}}
+
+%Document Information:
+\newcommand{\me}{Gabriel De La Parra}
+\newcommand{\class}{CC71Q - Introducción a la Minería de Datos}
+\newcommand{\institution}{Departamento de Ciencias de la Computación\\ \textsc{Universidad de Chile}}
+\newcommand{\task}{Mars Express Power Challenge}
+\author{\me}
+\title{\task}
+\date{16 de abril de 2016}
+%\date{\today}
+
+%Margins
+\usepackage[top=30mm, bottom=25mm, left=25mm, right=25mm]{geometry}
+\headsep=7mm
+
+%Header & Footer:
+\pagestyle{fancy}
+\lhead{\me} % Top left header
+\rhead{\task} % Top right header
+\cfoot{} % Bottom center footer
+\rfoot{\thepage\ / \protect\pageref{LastPage}} % Bottom right footer
+
+% Title Page
+\makeatletter
+    \def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+    \vskip 1.5em%
+    \normalsize \class 
+    \vskip 1em%
+    \institution
+    \vskip 1.5em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+    {\large \@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
