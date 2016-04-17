@@ -2,7 +2,7 @@
 
 \begin{document}
 
-\section*{Descripción de los datos}
+\section{Descripción de los datos}
 
 Los datos para este proyecto son entregados por la Agencial Espacial Europea en formato CSV (2 GBytes) para los últimos cuatro años marcianos. Cada año marciano corresponde a 687 días terrestes.
 \newline \par
@@ -41,6 +41,7 @@ Luego de importar los datos en R, lo primero que llama la atención es la cantid
 
 \begin{center}
 \includegraphics[width=3in]{Assets/power1SumAll.png}
+\\Figura 2. Consumo energético del sistema termal para el primer año
 \end{center}
 
 Al graficar este conjunto de datos se puede apreciar que existen niveles de comportamiento. Por la cantidad de datos que existen, el gráfico se aprecia como una mancha continua con secciones de rangos. Debido a esto se procede a graficar en rangos más pequeños.
@@ -49,6 +50,7 @@ Al graficar este conjunto de datos se puede apreciar que existen niveles de comp
 \includegraphics[width=2in]{Assets/power1Sum1k.png}
 \includegraphics[width=2in]{Assets/power1Sum5hk1k.png}
 \includegraphics[width=2in]{Assets/power1Sum9hk1k.png}
+\\Figuras 3, 4 y 5. Consumo energético del sistema termal en intervalos menores
 \end{center}
 
 Al graficar en rangos de mil datos, se puede apreciar mejor el comportamiento de los datos a lo largo del tiempo. Cabe notar que los datos anteriores corresponden a la suma total de los datos de consumo. Se intuye que al revisar los datos del consumo, se encontrará evidencia de la existencia de clusters de circuitos, es decir, de los 33 circuitos, deben haber varios grupos, divididos entre refrigeración/calefacción y entre los distintos sensores y secciones del satélite.
@@ -57,13 +59,19 @@ Una parte importante del trabajo consistirá en encontrar estos clusters. Una ve
 \newline \par 
 De la misma forma, de la primera observación de los datos, se prevee que pueda existir una relación con la distancia con el sol, similar a las estaciones del año. Esto podría influir en el consumo energético de forma significativa.
 \newline \par 
-Con respecto a los otros set de datos, se considera importante el ángulo de incidencia solar. Al graficar el total de datos de ángulos de incidencia sobre el tiempo, se puede apreciar que el comportamiento es aparentemente similar a una sinusoide. Al compararlo con gráficas de ángulos de incidencia en la Tierra, se infiere que el comportamiento debería ser, efectivamente, una sinusoide. 
+Con respecto a los otros set de datos, se considera importante el ángulo de incidencia solar.
 \begin{center}
-\includegraphics[width=2in]{Assets/srad_sm.png}
+\includegraphics[width=2in]{Assets/optsolargraph.jpg}
 \includegraphics[width=2in]{Assets/saaf1saAll.png}
 \includegraphics[width=2in]{Assets/saaf1500k850k.png}
+\\Figura 6. Curvas de incidencia solar en la Tierra
+\\Figura 7. Datos de incidencia solar del satélite para el primer año
+\\Figura 8. Datos de incidencia solar del satélite en un intervalo menor
 \end{center}
+Al graficar el total de datos de ángulos de incidencia sobre el tiempo, se puede apreciar que el comportamiento es aparentemente similar a una sinusoide. Al compararlo con gráficas de ángulos de incidencia en la Tierra (figura izquierda), se infiere que el comportamiento debería ser, efectivamente, una sinusoide. 
 \newline \par 
-Los datos, sin embargo, presentan varias lagunas y varias etapas con discontinuidades. Se pretende, intuitivamente, buscar alguna relación entre estos datos y los comandos recibidos remotamente para constatar que existe alguna relación. De la misma manera, se espera que exista una relación directa con los distintos eventos como eclipses que puedan haber sucedido.
+Se puede apreciar que los registros de incidencia solar presentan una laguna significativa y varias irregularidades. Se pretende buscar alguna relación entre estos datos y los comandos recibidos remotamente. De la misma manera, se espera que exista una relación directa con los distintos eventos como eclipses que puedan haber sucedido.
+\newline \par
+El resto de los datos corresponden a eventos puntuales, salvo los datos sobre información de vuelo y de distancia con el sol. Estos se utilizarán posteriomente para relacionar los valores de consumo y de incidencia solar.
 
 \end{document}

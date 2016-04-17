@@ -2,6 +2,20 @@
 
 \begin{document}
 
-\section{Temática}
+\section{Propuesta de trabajo}
+Debido al tamaño de los datos, se considera poco viable introducir toda la información directamente para análisis. Lo anterior principalmente debido a que al intentar visualizar todas las mediciones de los sistemas térmicos, se tuvo problemas en la capacidad computacional del equipo en donde se realizaba la tarea (i7-4600m Quad-2.9GHz, 8GB RAM).
+\newline \par
+Se considera entonces la opción de realizar relaciones manuales entre los datos para verificar si existen relaciones y posteriormente procesar los datos de forma más depurada.
+\newline \par
+Considerando lo anterior, se propone realizar las siguientes tareas:
+\begin{itemize}
+	\item Preparar la información de consumo energético para realizar clustering. El proposito de esto será encontrar los sistemas que sean de calefacción/refrigeración y así también separar idealmente los 33 circuitos térmicos según los 7 sensores que lleva la nave.
+    \item Preparar la información de incidencia solar y compararla con la información sobre eclipses y distancias con el sol.
+    \item Separar los distintos comandos según el sistema al cual comandan.
+\end{itemize}
+
+Lo anterior permitirá generar una estimación de relación de los datos. Se entiende que esta estimación puede no ser correcta debido al poco conocimiento específico del dominio del problema. Debido a lo anterior, se propone iterar con secciones de los datos para buscar la validación de las relaciones.
+\newline \par
+Finalmente se introduciran los datos a WEKA o R y se probará con distintos algoritmos para buscar una clasificación adecuada y construir un modelo que pueda enviado al concurso para su evaluación.
 
 \end{document}
