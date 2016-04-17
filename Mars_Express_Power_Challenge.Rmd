@@ -1,0 +1,69 @@
+view(---
+title: "Mars Express Power Challenge"
+author: "Gabriel De La Parra"
+date: "16 de abril de 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(plyr)
+library(reshape2)
+setwd("C:\\Users\\clgadel\\Desktop\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\")
+```
+
+```{r readData}
+dmop1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--dmop.csv")
+
+evtf1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--evtf.csv")
+
+ftl1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--ftl.csv")
+
+ltdata1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--ltdata.csv")
+
+saaf1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--saaf.csv")
+
+power1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducción a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\power--2008-08-22_2010-07-10.csv")
+
+saaf1Melt <- melt(saaf1,id="ut_ms")
+power1Melt <- melt(power1, id="ut_ms")
+ggplot(power1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(saaf1, aes(x=ut_ms, y=sa)) + geom_line()
+```
+
+Preparar los datos:
+sum <- rowSums(power1[,c(2:34)])
+ut_ms<-power1$ut_ms
+power1Sum <- data.frame(ut_ms,sum)
+rm(sum)
+rm(ut_ms)
+
+> ggplot(power1Sum[900000:901000,],aes(x=ut_ms, y=sum)) + geom_line()
+> ggplot(power1Sum[500000:501000,],aes(x=ut_ms, y=sum)) + geom_line()
+> ggplot(power1Sum[1:1000,],aes(x=ut_ms, y=sum)) + geom_line()
+> ggplot(saaf1, aes(x=ut_ms, y=sa)) + geom_line()
+> ggplot(saaf1[600000:601000,], aes(x=ut_ms, y=sa)) + geom_line()
+> ggplot(saaf1[900000:901000,], aes(x=ut_ms, y=sa)) + geom_line()
+> ggplot(saaf1[900000:910000,], aes(x=ut_ms, y=sa)) + geom_line()
+> ggplot(saaf1[100:10000,], aes(x=ut_ms, y=sa)) + geom_line()
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
