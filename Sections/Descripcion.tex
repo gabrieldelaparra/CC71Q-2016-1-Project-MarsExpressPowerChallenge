@@ -4,7 +4,7 @@
 
 \section*{Descripción de los datos}
 
-Los datos para este proyecto son entregados por la Agencial Espacial Europea en formato CSV (2 GBytes) para los últimos cuatro años marcianos (687 días terrestes).
+Los datos para este proyecto son entregados por la Agencial Espacial Europea en formato CSV (2 GBytes) para los últimos cuatro años marcianos. Cada año marciano corresponde a 687 días terrestes.
 \newline \par
 Los tres primeros años están destinados para entrenamiento de un sistema predictivo y tienen información sobre el consumo eléctrico del sistema termal. El cuarto año no tiene información sobre el consumo eléctrico del sistema termal.
 \subsection*{Contextos}
@@ -31,19 +31,39 @@ Incluye información sobre la distancia entre el Sol y Marte, distancia a la Tie
 
 \subsection*{Consumo energético}
 En estos sets se incluye información sobre la corriente medida en los 33 circuitos eléctricos de la nave. Cada medición se realiza cada 30 o 60 segundos. 
-\newline \par El objetivo de la competencia es predecir el consumo promedio por hora del satélite, por lo que la información sobre el consumo eléctrico solo está presente en los datos de entrenamiento.
+\newline \par 
+El objetivo de la competencia es predecir el consumo promedio por hora del satélite, por lo que la información sobre el consumo eléctrico solo está presente en los datos de entrenamiento.
 
 \section{Exploración inicial}
-El objetivo del proyecto es predecir el consumo energético de los sistemas termicos de la nave a partir de los otros datos que se tienen. La exploración inicial de los datos consistirá en analizar los datos de consumo energético y relacionarlos con los otros datos de comandos, incidencia solar y posición del satélite.
+Como se mencionó anteriormente, el objetivo de la competencia es predecir el consumo energético de los sistemas termicos de la nave a partir de los otros datos que se tienen. La exploración inicial de los datos consistirá en analizar los datos de consumo energético y relacionarlos con los otros datos de estado de los sistemas, incidencia solar y posición del satélite.
+\newline \par 
+Luego de importar los datos en R, lo primero que llama la atención es la cantidad de datos. El conjunto de datos que intuitivamente contiene más información es el de los datos del consumo energético. Éstos se muestrean cada 30 o 60 segundos. Para el primer año existen 1.830.121 regitros.
 
-Luego de importar los datos en R, lo primero que llama la atención es la cantidad de datos. El conjunto de datos que intuitivamente contiene más información es el de los datos del consumo energético. Éstos se muestrean cada 30 o 60 segundos. Para el primer año existen 1'830.121 regitros.
+\begin{center}
+\includegraphics[width=3in]{Assets/power1SumAll.png}
+\end{center}
 
-Al graficar este conjunto de datos se puede apreciar que existen dos niveles de comportamiento. Por la cantidad de datos que existen, el gráfico se aprecia como una mancha continua con 2 pares de rangos. Debido a esto se procede a graficar en rangos más pequeños.
+Al graficar este conjunto de datos se puede apreciar que existen niveles de comportamiento. Por la cantidad de datos que existen, el gráfico se aprecia como una mancha continua con secciones de rangos. Debido a esto se procede a graficar en rangos más pequeños.
 
-Al graficar en rangos de mil datos, entre medio del conjunto, se puede apreciar mejor el comportamiento de los datos a lo largo del tiempo. Cabe notar que los datos anteriores corresponden a la suma total de los datos de consumo. Intuitivamente se propone revisar los datos del consumo para revisar si existen clusters de circuitos, es decir, de los 33 circuitos, deben haber varios grupos, intuitivamente divididos entre refrigeración/calefacción y entre los distintos sensores y sectores del satélite.
+\begin{center}
+\includegraphics[width=2in]{Assets/power1Sum1k.png}
+\includegraphics[width=2in]{Assets/power1Sum5hk1k.png}
+\includegraphics[width=2in]{Assets/power1Sum9hk1k.png}
+\end{center}
 
-Una parte importante del trabajo consistirá en encontrar estos grupos. Una vez agrupados los datos se podrá proceder a relacionarlos con comandos enviados remotamente para el encendido y apagado de interfaces y así determinar una relación directa entre estos. De la misma forma, de la primera observación de los datos, se intuye que pueda existir una relación con la distancia con el sol, similar a las estaciones del año. Esto podría influir en el consumo energético de forma significativa.
-
-Con respecto a los otros set de datos, el siguiente que parece interesante para análisis es el de la incidencia solar. Al graficar el total de datos de ángulos de incidencia sobre el tiempo, se puede apreciar que el comportamiento es aparentemente similar a una sinusoide. Al compararlo con gráficas de ángulos de incidencia en la Tierra, se infiere que el comportamiento debería ser, efectivamente, una sinusoide. Los datos, sin embargo, presentan varias lagunas y varias etapas con discontinuidades. Se pretende, intuitivamente, buscar alguna relación entre estos datos y los comandos recibidos remotamente para constatar que existe alguna relación. De la misma manera, se espera que exista una relación directa con los distintos eventos como eclipses que puedan haber sucedido.
+Al graficar en rangos de mil datos, se puede apreciar mejor el comportamiento de los datos a lo largo del tiempo. Cabe notar que los datos anteriores corresponden a la suma total de los datos de consumo. Se intuye que al revisar los datos del consumo, se encontrará evidencia de la existencia de clusters de circuitos, es decir, de los 33 circuitos, deben haber varios grupos, divididos entre refrigeración/calefacción y entre los distintos sensores y secciones del satélite.
+\newline \par 
+Una parte importante del trabajo consistirá en encontrar estos clusters. Una vez agrupados los datos se podrá proceder a relacionarlos con comandos enviados remotamente para el encendido y apagado de interfaces y así determinar una relación directa entre estos. 
+\newline \par 
+De la misma forma, de la primera observación de los datos, se prevee que pueda existir una relación con la distancia con el sol, similar a las estaciones del año. Esto podría influir en el consumo energético de forma significativa.
+\newline \par 
+Con respecto a los otros set de datos, se considera importante el ángulo de incidencia solar. Al graficar el total de datos de ángulos de incidencia sobre el tiempo, se puede apreciar que el comportamiento es aparentemente similar a una sinusoide. Al compararlo con gráficas de ángulos de incidencia en la Tierra, se infiere que el comportamiento debería ser, efectivamente, una sinusoide. 
+\begin{center}
+\includegraphics[width=2in]{Assets/srad_sm.png}
+\includegraphics[width=2in]{Assets/saaf1saAll.png}
+\includegraphics[width=2in]{Assets/saaf1500k850k.png}
+\end{center}
+\newline \par 
+Los datos, sin embargo, presentan varias lagunas y varias etapas con discontinuidades. Se pretende, intuitivamente, buscar alguna relación entre estos datos y los comandos recibidos remotamente para constatar que existe alguna relación. De la misma manera, se espera que exista una relación directa con los distintos eventos como eclipses que puedan haber sucedido.
 
 \end{document}

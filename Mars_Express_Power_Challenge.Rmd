@@ -10,21 +10,21 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(plyr)
 library(reshape2)
-setwd("C:\\Users\\clgadel\\Desktop\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\")
+setwd("C:\\Users\\clgadel\\Desktop\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\")
 ```
 
 ```{r readData}
-dmop1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--dmop.csv")
+dmop1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--dmop.csv")
 
-evtf1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--evtf.csv")
+evtf1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--evtf.csv")
 
-ftl1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--ftl.csv")
+ftl1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--ftl.csv")
 
-ltdata1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--ltdata.csv")
+ltdata1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--ltdata.csv")
 
-saaf1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--saaf.csv")
+saaf1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\context--2008-08-22_2010-07-10--saaf.csv")
 
-power1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci髇 a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\power--2008-08-22_2010-07-10.csv")
+power1 <- read.csv("C:\\Users\\clgadel\\Desktop\\DCC\\4 - 2016.01\\CC71Q-1 Introducci贸n a la Mineria de Datos\\Tareas\\Mars Express\\Data\\train_set\\power--2008-08-22_2010-07-10.csv")
 
 saaf1Melt <- melt(saaf1,id="ut_ms")
 power1Melt <- melt(power1, id="ut_ms")
