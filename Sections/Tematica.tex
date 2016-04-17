@@ -8,13 +8,14 @@ Debido al tamaño de los datos, se considera poco viable analizar toda la inform
 Se considera entonces la opción de realizar segmentación de la información por rangos según los eventos visibles en cuanto a la recepción de luz. A partir de esta segmentación se propone buscar la superposición entre los datos para verificar si existen relaciones y posteriormente procesar los datos de forma más depurada.
 \newline \par
 Considerando lo anterior, se propone realizar las siguientes tareas:
+
 \begin{itemize}
-	\item Preparar la información de consumo energético para realizar clustering. El proposito de esto será encontrar los sistemas que sean de calefacción/refrigeración y así también separar idealmente los 33 circuitos térmicos según los 7 sensores que lleva la nave.
     \item Preparar y segmentar la información de incidencia solar y compararla con la información sobre eclipses, distancias con el sol, dirección de la nave y comandos enviados.
+	\item Preparar la información de consumo energético para realizar clustering. El proposito de esto será encontrar los sistemas que sean de calefacción/refrigeración y así también separar idealmente los 33 circuitos térmicos según los 7 sensores que lleva la nave.
 \end{itemize}
 
 Lo anterior permitirá generar una estimación de relación de los datos. Se entiende que esta estimación puede no ser correcta debido al poco conocimiento específico del dominio del problema. Debido a lo anterior, se propone iterar con secciones de los datos para buscar la validación de las relaciones.
 \newline \par
-Finalmente se introduciran los datos a WEKA o R y se probará con distintos algoritmos para buscar una clasificación adecuada y construir un modelo que pueda enviado al concurso para su evaluación.
+Si bien, se es consciente de la falta de experiencia en el proceso, se pretende que posterior a lo anterior sea posible introducir los datos a WEKA o R y se probará con distintos algoritmos para buscar una clasificación adecuada y construir un modelo que pueda enviado al concurso para su evaluación.
 
 \end{document}
