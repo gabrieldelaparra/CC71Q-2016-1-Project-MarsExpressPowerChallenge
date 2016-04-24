@@ -8,14 +8,15 @@ Los datos para este proyecto son entregados por la Agencial Espacial Europea en 
 \newline \par
 Los tres primeros años están destinados para entrenamiento de un sistema predictivo y tienen información sobre el consumo eléctrico del sistema termal. El cuarto año no tiene información sobre el consumo eléctrico del sistema termal.
 \subsection*{Contextos}
-Los datos se encuentran separados según el tipo (o contexto) de información que contienen. Así, existen cinco tipos de contextos de datos:
-\begin{itemize}
-    \item SAAF: Solar Aspect Angles
-    \item DMOP: Detailed Mission Operations Plan
-    \item FTL: Flight Dynamics Timeline
-    \item EVTF: Other Events
-    \item LTDATA: Long Term Data such as Sun-Mars Distance
-\end{itemize}
+Los datos se encuentran separados según el tipo (o contexto) de información que contienen. Así, existen cinco tipos de contextos de datos: Solar Aspect Angles (SAAF), Detailed Mission Operations Plan (DMOP), Flight Dynamics Timeline (FTL), Other Events(EVTF), Long Term Data such as Sun-Mars Distance (LTDATA).
+\newline \par
+%\begin{itemize}
+%    \item SAAF: Solar Aspect Angles
+%    \item DMOP: Detailed Mission Operations Plan
+%    \item FTL: Flight Dynamics Timeline
+%    \item EVTF: Other Events
+%    \item LTDATA: Long Term Data such as Sun-Mars Distance
+%\end{itemize}
 
 Cada uno de los tipos de contexto tienen diversas categorías (o columnas).
 \subsubsection*{SAAF: Aspectos solares}
@@ -38,7 +39,7 @@ El objetivo de la competencia es predecir el consumo promedio por hora del saté
 Como se mencionó anteriormente, el objetivo de la competencia es predecir el consumo energético de los sistemas termicos de la nave a partir de los otros datos que se tienen. La exploración inicial de los datos consistirá en analizar los datos de consumo energético y relacionarlos con los otros datos de estado de los sistemas, incidencia solar y posición del satélite.
 \newline \par 
 Luego de importar los datos en R, lo primero que llama la atención es la cantidad de datos. El conjunto de datos que intuitivamente contiene más información es el de los datos del consumo energético. Éstos se muestrean cada 30 o 60 segundos. Para el primer año existen 1.830.121 regitros.
-
+\newline \par 
 Al graficar este conjunto de datos se puede apreciar que existen niveles de comportamiento. Por la cantidad de datos que existen, el gráfico se aprecia como una mancha continua con secciones de rangos. Debido a esto se procede a graficar en rangos más pequeños.
 
 \begin{center}
