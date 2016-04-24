@@ -39,14 +39,24 @@ power1Sum <- data.frame(ut_ms,sum)
 rm(sum)
 rm(ut_ms)
 
-> ggplot(power1Sum[900000:901000,],aes(x=ut_ms, y=sum)) + geom_line()
-> ggplot(power1Sum[500000:501000,],aes(x=ut_ms, y=sum)) + geom_line()
-> ggplot(power1Sum[1:1000,],aes(x=ut_ms, y=sum)) + geom_line()
-> ggplot(saaf1, aes(x=ut_ms, y=sa)) + geom_line()
-> ggplot(saaf1[600000:601000,], aes(x=ut_ms, y=sa)) + geom_line()
-> ggplot(saaf1[900000:901000,], aes(x=ut_ms, y=sa)) + geom_line()
-> ggplot(saaf1[900000:910000,], aes(x=ut_ms, y=sa)) + geom_line()
-> ggplot(saaf1[100:10000,], aes(x=ut_ms, y=sa)) + geom_line()
+ ggplot(power1Sum[900000:901000,],aes(x=ut_ms, y=sum)) + geom_line()
+ ggplot(power1Sum[500000:501000,],aes(x=ut_ms, y=sum)) + geom_line()
+ ggplot(power1Sum[1:1000,],aes(x=ut_ms, y=sum)) + geom_line()
+ ggplot(saaf1, aes(x=ut_ms, y=sa)) + geom_line()
+ ggplot(saaf1[600000:601000,], aes(x=ut_ms, y=sa)) + geom_line()
+ ggplot(saaf1[900000:901000,], aes(x=ut_ms, y=sa)) + geom_line()
+ ggplot(saaf1[900000:910000,], aes(x=ut_ms, y=sa)) + geom_line()
+ ggplot(saaf1[100:10000,], aes(x=ut_ms, y=sa)) + geom_line()
+
+Rangos:
+ggplot(saaf1[1:179800,], aes(x=ut_ms, y=sa)) + geom_line()
+ggplot(saaf1[179800:231850,], aes(x=ut_ms, y=sa)) + geom_line()
+
+findit = function(x,vec){ 
+        y = vec - x
+        y[y<=0] = NA
+        if(all(is.na(y)))NA else which.min(y)}
+ applied <- sapply(dmop1$ut_ms, findit, saaf1$ut_ms)
 
 ## R Markdown
 
