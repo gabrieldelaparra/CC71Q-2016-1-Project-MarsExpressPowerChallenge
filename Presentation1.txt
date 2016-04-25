@@ -1,0 +1,28 @@
+Diapo1:
+Empezaré por la motivación alrededor de este tema, el dominio del problema y algunas aplicaciones. Posteriormente explicar la problemática como tal y describir los datos y las hipótesis e intuiciones al respecto.
+
+Diapo2:
+Este es un mapa del mundo del 1560, demuestra nuestra capacidad cartográfica hace 400 años.
+
+Diapo3:
+El Mars Express Orbiter, un satélite lanzado el 2004 para exploración de Marte. Una de sus principales misiones es hacer cartografía. Tiene varios sensores, los cuales tienen condiciones específicas de operación.
+
+Diapo4: 
+Estas son algunas de las imágenes que permite capturar el Mars Express, las que se pueden traducir en mapas en tres dimensiones.
+
+Diapo5: 
+Algunas de las aplicaciones que ha permitido tener la cartografía de Marte es poder seleccionar lugares seguros para el aterrizaje y la exploración del planeta. En esta imágen el Sojourner, el Spirit y el Curiosity
+
+Diapo6:
+La problemática a resolver es predecir el consumo energético del satélite. Como se mencionó anteriormente, los sensores tienen rangos de operación. Dos de los sensores deben funcionar a -180°C y los otros 5 a 20°C. De aquí que el sistema de climatización de la nave tiene un gran consumo. Dicho sistema de climatización tiene 33 circuitos.
+Lo que se busca es predecir como variará el consumo eléctrico en estos circuitos según el estado, la función y los comandos enviados a la nave, así como también las distintas características del entorno como la incidencia solar, eventos como eclipses y otros.
+
+Diapo7:
+Los datos son recibidos en 3 sets de entrenamiento y un set de pruebas. Cada set de entrenamiento tiene datos sobre los comandos, eventos, incidencia solar y otros. Adicionalmente se dan los consumos eléctricos para entrenar. Para el set de pruebas, no se tienen los detalles del consumo energético.
+Se pueden apreciar algunas muestras de los detalles de los datos de misión y eventos. Se aprecia que son eventos discretos, tipo pulsos.
+
+Diapo8:
+Para los datos de incidencia solar, al graficar para el primer año se puede apreciar que tiene cierta semejanza con la incidencia solar en la tierra, salvo algunas lagunas. Estas lagunas tienen relación con los datos anteriores de eclipses y otros.
+
+Diapo9:
+La metodología para abordar el problema será utilizar un algoritmo supervisado de clasificación para valores continuos. Los siguientes pasos serán hacer un preprocesamiento de los datos, identificar y transformar los valores de los pulsos de los comandos en zonas, eliminar el ruido de las mediciones, alinear las escalas de tiempo para que sea más clara las correlaciones e intentar conseguir un modelo con estas modificaciones. Luego ver los resultados y definir desde ahí las correcciones necesarias.
