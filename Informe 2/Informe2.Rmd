@@ -14,7 +14,7 @@ output: html_document
 ---
 
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
 library(dplyr)
 library(zoo)
 library(miscTools)
@@ -22,7 +22,7 @@ library(randomForest)
 library(ggplot2)
 ```
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, echo=FALSE}
 setwd("C:/Users/clgadel/Desktop/DCC/4 - 2016.01/CC71Q-1 Introducción a la Mineria de Datos/Tareas/Mars Express")
 dmop1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--dmop.csv")
 evtf1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--evtf.csv")
@@ -37,12 +37,12 @@ Con el objetivo de obtener una impresión de los datos, se procedió a graficar 
 
 Los sets del problema tienen los siguientes datos:
 ```{r}
-head(saaf1,10)
-head(dmop1,10)
-head(evtf1,10)
-head(ftl1,10)
-head(ltdata1,10)
-head(power1,10)
+head(saaf1,5)
+head(dmop1,5)
+head(evtf1,5)
+head(ftl1,5)
+head(ltdata1,5)
+head(power1,5)
 ```
 
 Al graficar cada uno de estos sets por separado, se pueden obtener los siguientes gráficas:

@@ -35,10 +35,25 @@ powerTest <- read.csv("power-prediction-sample-2014-04-14_2016-03-01.csv")
 #Se colocarán los datos de entrada en el mismo formato, es decir, cada 1 hora. 
 #Se tomara el promedio de los valores. Esto para los valores de potencia.
 
+
 #Melts
-power1Melt <- melt(power1, id=ut_ms)
-saaf1Melt <- melt(saaf1, id=ut_ms)
-ltdata1Melt <- melt(ltdata1, id=ut_ms)
+library(reshape2)
+power1Melt <- melt(power1, id='ut_ms')
+saaf1Melt <- melt(saaf1, id='ut_ms')
+ltdata1Melt <- melt(ltdata1, id='ut_ms')
+dmop1Melt <- melt(dmop1, id='ut_ms')
+evtf1Melt <- melt(evtf1, id='ut_ms')
+ftl1Melt <-  melt(ftl1, id='ut_ms')
+
+#Plots
+library(ggplot2)
+ggplot(power1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(saaf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(ltdata1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(dmop1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(evtf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(ftl1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+
 
 #Vector de suma de potencias:
 sum <- rowSums(power1[,c(2:34)])
