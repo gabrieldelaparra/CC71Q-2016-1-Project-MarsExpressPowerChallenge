@@ -35,25 +35,28 @@ powerTest <- read.csv("power-prediction-sample-2014-04-14_2016-03-01.csv")
 #Se colocarán los datos de entrada en el mismo formato, es decir, cada 1 hora. 
 #Se tomara el promedio de los valores. Esto para los valores de potencia.
 
+maxT <- power1[10000,1]
 
 #Melts
 library(reshape2)
-power1Melt <- melt(power1, id='ut_ms')
-saaf1Melt <- melt(saaf1, id='ut_ms')
-ltdata1Melt <- melt(ltdata1, id='ut_ms')
-dmop1Melt <- melt(dmop1, id='ut_ms')
-evtf1Melt <- melt(evtf1, id='ut_ms')
-ftl1Melt <-  melt(ftl1, id='ut_ms')
+#power1Melt <- melt(power1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
+#saaf1Melt <- melt(saaf1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
+#ltdata1Melt <- melt(ltdata1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
+#dmop1Melt <- melt(dmop1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
+#evtf1Melt <- melt(evtf1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
 
 #Plots
 library(ggplot2)
-ggplot(power1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
-ggplot(saaf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
-ggplot(ltdata1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
-ggplot(dmop1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
-ggplot(evtf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
-ggplot(ftl1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+#ggplot(power1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+#ggplot(saaf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+#ggplot(ltdata1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+#ggplot(dmop1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+#ggplot(evtf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
 
+#Raw Hipothesis:
+#RawHip<-power1Melt
+#RawHip<-merge(x=RawHip, y=saaf1Melt, by="ut_ms", all=TRUE)
+#RawHip<-merge(x=RawHip, y=ltdata1Melt, by="ut_ms", all=TRUE)
 
 #Vector de suma de potencias:
 sum <- rowSums(power1[,c(2:34)])
