@@ -1,0 +1,27 @@
+\documentclass[../Main.tex]{subfiles}
+
+\begin{document}
+
+\section{Introducción}
+
+El Mars Express Power Challenge tiene como objetivo predecir el consumo de los circuitos eléctricos de calefacción y refrigeración de un satélite de exploración en la órbita de Marte, necesarios para el correcto funcionamiento de los equipos de exploración científica de la nave.
+\newline \par
+Para realizar dicha predicción se tienen un set de entrenamiento correspondiente a los datos de tres años marcianos (q año marciano son 687 días terrestres) y un set de pruebas correspondiente al cuarto año.
+Cada set está compuesto por cinco subsets de datos de entrenamiento y un subset de los valores que se desean predecir. Los datos para entrenamiento tienen que ver con comandos que se envían a la nave, ángulos de incidencia solar, posición del satélite con respecto a marte y la tierra, eventos tales como eclipses. Los datos a predecir indican el valor de corriente de cada uno de los 33 circuitos eléctricos. 
+\newline \par
+La forma de evaluar la predicción consiste en enviar un archivo de predicción, con promedios por cada hora, para un año y los 33 circuitos. La precisión de la medición se calculará mediante el \textit{Root Mean Square Error (RMSE)}  que se calcula de la siguiente forma:
+\begin{center} 
+$\epsilon = \sqrt[]{\frac{1}{NM}\sum{(c_{ij}-r_{ij})^{2}}}$ 
+\end{center}
+$\epsilon$: root mean square error \newline
+$c_{ij}$: valor i-ésimo de predicción en el cuarto año\newline
+$r_{ij}$: valor i-ésimo de referencia en el cuarto año \newline
+$N$: número total de muestras para un año $i \in [1,N]$ with $N<=16488$ \newline
+$M$: número total de parámetros $j \in [1,M]$ with  $M=33$ 
+\newline \par
+Para poder realizar una predicción, se utilizó un método de predicción de valores continuos. A esta categoría de predicción se le conoce como regresión. Existen varias técnicas de regresión, como primer acercamiento se aplicó RandomForest, visto en clase para clasificación, el cual tiene también aplicaciones sobre regresión.
+\newline \par
+Para la visualización y la implementación del algoritmo se utilizó R en RStudio. Lo anterior no descarta que puedan aplicarse otras herramientas como Python o MatLab para realizar el (pre) procesamiento de los datos.
+%\newline \par 
+%Como consideraciones previas, se debe notar que debido a la cantidad de los valores procesados y a que la capacidad computacional requerida para realizar pruebas sobre el set completo de datos era superior a la existente, se realizó la predicción de un circuito a la vez, utilizando sets de entrenamiento de 8000 registros, correspondientes a la mitad de los puntos para un año. Al intentar trabajar con más valores, RStudio indicó que se requería mayor capacidad. De todas formas, se dejará pendiente el análisis de estos resultados para discusión y análisis posterior.
+\end{document}
