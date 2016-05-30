@@ -2,46 +2,53 @@
 title: "Mars Express Power Challenge"
 author: "Gabriel De La Parra"
 date: "30 de mayo de 2016"
-
-output: 
-   pdf_document:
-      includes:
-         in_header: Preamble.tex
-      toc: true
-      toc_depth: 3
-      number_sections: true
-      keep_tex: true
+output: html_document
+#output: 
+#   pdf_document:
+#      includes:
+#         in_header: Preamble.tex
+#      toc: true
+#      toc_depth: 3
+#      number_sections: true
+#      keep_tex: true
 ---
 
-```{r, results='asis', echo=FALSE}
-cat("\\newpage")
-```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+library(zoo)
+library(miscTools)
+library(randomForest)
+library(ggplot2)
 ```
 
 ```{r, cache=TRUE}
+setwd("C:/Users/clgadel/Desktop/DCC/4 - 2016.01/CC71Q-1 Introducción a la Mineria de Datos/Tareas/Mars Express")
+dmop1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--dmop.csv")
+evtf1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--evtf.csv")
+ftl1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--ftl.csv")
+ltdata1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--ltdata.csv")
+saaf1 <- read.csv("Data\\train_set\\context--2008-08-22_2010-07-10--saaf.csv")
+power1 <- read.csv("Data\\train_set\\power--2008-08-22_2010-07-10.csv")
+```
+
+## Visualización
+Con el objetivo de obtener una impresión de los datos, se procedió a graficar estos en bruto y buscar correlaciones entre los datos. 
+
+Los sets del problema tienen los siguientes datos:
+```{r}
+head(saaf1,10)
+head(dmop1,10)
+head(evtf1,10)
+head(ftl1,10)
+head(ltdata1,10)
+head(power1,10)
+```
+
+Al graficar cada uno de estos sets por separado, se pueden obtener los siguientes gráficas:
+```{r}
 
 ```
 
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Al graficar los valores de potencia, los datos de incidencia solar y los datos de misión, se puede apreciar que existe una correlación entre los anteriores, por lo que se procedió a trabajar sobre estos datos en primera instancia. 
+%Grafico de power1, saaf1 y ltdata1;
