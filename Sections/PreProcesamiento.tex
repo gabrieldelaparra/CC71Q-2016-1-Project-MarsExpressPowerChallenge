@@ -3,6 +3,74 @@
 \begin{document}
 
 \section{Pre-procesamiento de los datos}
-Como primer enfoque 
+\subsection{Escala temporal}
+Para convertir la escala temporal de los datos se utiliza el comando as.POSIXct, considerando el cambio entre milisegundos a segundos y con inicio de valores en 1970-01-01.\footnote{UNIX TIME: \url{https://en.wikipedia.org/wiki/Unix_time}} 
+
+\begin{lstlisting}[language=R]
+power1DT <- power1
+power1DT$ut_ms <- as.POSIXct((((power1['ut_ms'])/1000)[,]), origin="1970-01-01")
+\end{lstlisting}
+
+\begin{center}
+\textbf{Tabla 4.} Conversión de la escala temporal\\
+\begin{tabular}{|l|l|}
+\hline
+old(ut\_ms)           & new(DateTime)            \\ \hline
+1.2193632130E+12 & 21/08/2008 20:00:13 \\ \hline
+1.2193632350E+12 & 21/08/2008 20:00:35 \\ \hline
+1.2193632950E+12 & 21/08/2008 20:01:35 \\ \hline
+1.2193633550E+12 & 21/08/2008 20:02:35 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Agrupación por hora}
+
+Se agruparon los valores por horas con dos intenciones. En primera instancia, el resultado de las predicciones debe entregarse en promedios por hora. Si bien, se considera que las predicciones pueden ser mucho más adecuadas si se utilizan todos los valores existentes, por motivos de capacidad computacional se decidió promediar para disminuir la cantidad de valores en los dataFrames, con lo que el procesamiento se puede acelerar.
+\newline \par
+Para agrupar los valores por hora, se ocupa el comando \textit{cut}, seguido de \textit{group\_by}\footnote{group\_by: library(dplyr)}:
+\newline \par
+\begin{lstlisting}[language=R]
+power1DT$ut_ms <- cut(power1DT$ut_ms, breaks="hour")
+power1DTHourMean <- power1DT %>% group_by(ut_ms) %>% summarise_each(funs(mean))
+\end{lstlisting}
+
+El resultado de esta operación disminuyó, para el frame \textit{power}, el número de filas de \textit{1830121} a \textit{16454}.
+
+\subsection{Match de escalas temporales}
+
+Para poder entrenar el modelo, es necesario que los valores estén en el mismo instante temporal, de lo contrario, un valor de potencia en un instante \textit{t} podría tener un valor de incidencia solar \textit{NA}. El match se hace considerando como origen el tiempo del vector de potencias.
+\newline \par
+\begin{lstlisting}[language=R]
+power1DTHourMeanMS <- power1DTHourMean$ut_ms
+
+for (i in 1:nrow(ltdata1DTHM)) {
+  nearest <- findInterval(ltdata1DTHM$ut_ms[i],power1DTHMms)
+  ltdata1DTHM$ut_ms[i] <- power1DTHMms[nearest]
+}
+\end{lstlisting}
+
+El resultado de esta operación busca en \textit{ltdata} y \textit{saaf} el valor de \textit{ut\_ms} más cercando en \textit{power} y lo reemplaza.
+
+\subsection{Interpolación de valores faltantes}
+
+Los valores de \textit{ltdata} se entregan originalmente uno por día. Para una correcta predicción es necesario interpolar estos valores para cada hora. Como se trata de distancias y angulos entre planetas y el sol, se puede interpolar linearmente todos los puntos faltantes. Lo anterior se realiza mediante \textit{na.spline} y \textit{na.approx}\footnote{na.spline, na.approx: library(zoo)}
+\newline \par
+\begin{lstlisting}[language=R]
+ltdata1DTHM$sunmars_km <- na.spline(ltdata1DTHM[,2],na.rm = FALSE)
+ltdata1DTHM$earthmars_km <- na.spline(ltdata1DTHM[,3],na.rm = FALSE)
+ltdata1DTHM$sunmarsearthangle_deg <- na.spline(ltdata1DTHM[,4],na.rm = FALSE)
+ltdata1DTHM$solarconstantmars <- na.spline(ltdata1DTHM[,5],na.rm = FALSE)
+ltdata1DTHM$occultationduration_min <- na.spline(ltdata1DTHM[,6],na.rm = FALSE)
+ltdata1DTHM$eclipseduration_min <- na.approx(ltdata1DTHM[,7],na.rm = FALSE, rule=2)
+\end{lstlisting}
+
+\subsection{Unión de valores}
+Posterior a realizar todos los cambios en los frames \textit{power}, \textit{ltdata} y \textit{saaf}, se deben unir estos valores para tener un solo dataframe para entrenamiento. Esto se puede realizar mediante \textit{merge}:
+\newline \par
+\begin{lstlisting}[language=R]
+power1DTHM<-merge(x=power1DTHM, y=saaf1DTHM, by="ut_ms", all.x=TRUE)
+power1DTHM<-merge(x=power1DTHM, y=ltdata1DTHM, by="ut_ms", all.x=TRUE)
+\end{lstlisting}
+El resultado es un frame que tiene la escala de tiempo, todas las columnas de \textit{power}, \textit{ltdata} y \textit{saaf}.
 
 \end{document}

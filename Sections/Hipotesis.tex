@@ -3,9 +3,9 @@
 \begin{document}
 
 \section{Hipótesis}
-La hipótesis inicial es que existe una predicción gruesa y una predicción fina. La predicción gruesa tiene que ver con los datos de incidencia solar y eventos de la nave. La predicción fina tiene que ver con los datos de eventos y de comandos de la nave.
+La hipótesis inicial es que existe una predicción \textit{gruesa} y una predicción \textit{fina}. La predicción gruesa tiene que ver con los datos de incidencia solar y eventos de la nave. La predicción fina tiene que ver con los datos de eventos y de comandos de la nave.
 \newline \par
-Los datos de comandos y de eventos se dejarán por fuera en esta primera instancia. Se considera que el procesamiento sobre estos datos debe ser mayor, ya que requiere generar periodos de ventana, lo cual se considera más complejo, ya que requiere identificar correlaciones entre los distintos circuitos y entre los distintos comandos, los cuales no están especificados como 'ON' y 'OFF' o de forma similar.
+Los datos de comandos y de eventos se dejarán por fuera en esta primera instancia. Se considera que el procesamiento sobre estos datos debe ser mayor, ya que requiere generar periodos de ventana, lo cual se considera más complejo, ya que requiere identificar correlaciones entre los distintos circuitos y entre los distintos comandos, los cuales no están especificados como 'ON' y 'OFF' o de forma similar, como se puede apreciar en las Tablas 1, 2 y 3.
 \newline \par
 En este trabajo se avanzará sobre la hipótesis de la predicción gruesa. Para poder realizar predicción sobre los datos es necesario pre-procesar los datos para colocarlos en escalas de tiempos similares. Para esto se requerirá realizar un match en la escala temporal ($'ut\_ms'$) de los valores de incidencia solar con los de de potencia de entrada. Esta escala se encuentra en tiempo UNIX de milisegundos(POSIX), por lo que será necesario convertirlos a DateTime para facilitar su análisis.
 \newline \par
