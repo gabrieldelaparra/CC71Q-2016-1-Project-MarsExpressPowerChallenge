@@ -1,0 +1,22 @@
+\documentclass[../Main.tex]{subfiles}
+
+\begin{document}
+
+\section{Hipótesis}
+La hipótesis inicial es que existe una predicción gruesa y una predicción fina. La predicción gruesa tiene que ver con los datos de incidencia solar y eventos de la nave. La predicción fina tiene que ver con los datos de eventos y de comandos de la nave.
+\newline \par
+Los datos de comandos y de eventos se dejarán por fuera en esta primera instancia. Se considera que el procesamiento sobre estos datos debe ser mayor, ya que requiere generar periodos de ventana, lo cual se considera más complejo, ya que requiere identificar correlaciones entre los distintos circuitos y entre los distintos comandos, los cuales no están especificados como 'ON' y 'OFF' o de forma similar.
+\newline \par
+En este trabajo se avanzará sobre la hipótesis de la predicción gruesa. Para poder realizar predicción sobre los datos es necesario pre-procesar los datos para colocarlos en escalas de tiempos similares. Para esto se requerirá realizar un match en la escala temporal ($'ut\_ms'$) de los valores de incidencia solar con los de de potencia de entrada. Esta escala se encuentra en tiempo UNIX de milisegundos(POSIX), por lo que será necesario convertirlos a DateTime para facilitar su análisis.
+\newline \par
+Debido a que los valores para predicción se deben entregar como promedio por hora, será necesario calcular el promedio de los datos de entrenamiento, agrupados por hora y crear un nuevo dataframe con estos.
+\newline \par
+Posteriormente se realizará un merge sobre las tablas de valores antes calculadas para tener una sola tabla sobre la cual se entrenará al sistema. 
+\newline \par
+Con el fin de poder realizar una correcta predicción, es necesario interpolar los valores faltantes para los valores de la misión de la nave, ya que estos últimos se reciben una vez al día.
+\newline \par
+Con la intención de probar que el modelo ha sido correctamente entrenado, se entrenará al sistema con un conjunto de los datos y se evaluará con otro conjunto. Para este fin se ha dividido el set de un año en dos.
+\newline \par
+Finalmente se realizarán mediciones para comprobar si este esquema de predicción es satisfactorio.
+
+\end{document}
