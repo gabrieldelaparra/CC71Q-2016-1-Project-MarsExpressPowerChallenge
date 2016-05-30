@@ -41,7 +41,7 @@ maxT <- power1[10000,1]
 library(reshape2)
 #power1Melt <- melt(power1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
 #saaf1Melt <- melt(saaf1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
-#ltdata1Melt <- melt(ltdata1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
+ltdata1Melt <- melt(ltdata1, id='ut_ms')
 #dmop1Melt <- melt(dmop1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
 #evtf1Melt <- melt(evtf1[1:which.min(abs(power1$ut_ms - maxT)),], id='ut_ms')
 
@@ -49,9 +49,29 @@ library(reshape2)
 library(ggplot2)
 #ggplot(power1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
 #ggplot(saaf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
-#ggplot(ltdata1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+ggplot(ltdata1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
 #ggplot(dmop1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
 #ggplot(evtf1Melt, aes(x=ut_ms, y=value, color=variable))+geom_line()
+
+#Plot On Top
+
+ggplot(ltdata1, aes(x=ut_ms, y=sunmars_km))+geom_line()
+ggplot(ltdata1, aes(x=ut_ms, y=earthmars_km))+geom_line()
+ggplot(ltdata1, aes(x=ut_ms, y=sunmarsearthangle_deg))+geom_line()
+ggplot(ltdata1, aes(x=ut_ms, y=solarconstantmars))+geom_line()
+
+plot(p1)
+par(new=TRUE)
+plot(p2)
+
+sum <- rowSums(power1[,c(2:34)])
+ut_ms<-power1$ut_ms
+power1Sum <- data.frame(ut_ms,sum)
+ggplot(power1Sum,aes(x=ut_ms, y=sum)) + geom_line()
+
+ggplot(ltdata1,aes(x=ut_ms, y=sunmars_km)) + geom_line()
+ggplot(ltdata1,aes(x=ut_ms, y=sunmarsearthangle_deg)) + geom_line()
+ggplot(ltdata1,aes(x=ut_ms, y=solarconstantmars)) + geom_line()
 
 #Raw Hipothesis:
 #RawHip<-power1Melt
