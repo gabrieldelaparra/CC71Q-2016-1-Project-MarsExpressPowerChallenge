@@ -4,5 +4,40 @@
 
 \section{Procesamiento de los datos}
 
+\subsection{Random Forest}
+Para la regresión se ocupó \textit{Random Forest}\footnote{library(randomforest)}. La forma de ocupar la librería es intuitiva, se debe entrenar el modelo con un set y probarlo con otro. La forma de entrenar el set está dado por el siguiente código:
+\newline \par
+\begin{lstlisting}[language=R]
+predictField <- 5 #Indice de la columna que se va a predecir
+predictCols <- colnames(power1DT[,-1])
+train <- power1DTHourMean[1:12000,-1]
+test <- power1DTHourMean[12001:16000,-1]
+colName <- predictCols[predictField]
+rf <- randomForest(as.formula(paste(colName," ~ .")) ,data=train, ntree=10)
+\end{lstlisting}
+Para utilizar el modelo generado se utiliza el comando \textit{predict}.
+\newline \par
+\begin{lstlisting}[language=R]
+predicted <- predict(rf, test)
+\end{lstlisting}
+Existen varias limitantes encontradas durante el procesamiento de los datos, estas se discutirán en las conclusiones, sin embargo, se consiguió lograr un error bajo para varios campos, por lo que se consideró aceptable el método empleado.
+\subsection{Calculo de error}
+Para el cálculo del error es necesario definir la función entregada por la evaluación del Mars Challenge.
+\newline \par
+\begin{lstlisting}[language=R]
+RMSE = function(predicted, reference){
+  sqrt(mean((predicted - reference)^2))
+}
+\end{lstlisting}
+Para emplear dicha función, se requieren los valores predichos y la columna de los valores originales. De la misma manera se propone graficar los puntos de entrenamiento versus el cálculo obtenido para un análisis y comparación visual.
+\newline \par
+\begin{lstlisting}[language=R]
+r2 <- RMSE(predCol, predicted)
+p <- ggplot(aes(x=actual, y=pred), 
+	 data=data.frame(actual=predCol, pred=predict(rf, test)))
+p + geom_point() +  
+	geom_abline(color="red") + 
+    	ggtitle(paste("RandomForest Regression RMSE=", r2, sep=""))
+\end{lstlisting}
 
 \end{document}
